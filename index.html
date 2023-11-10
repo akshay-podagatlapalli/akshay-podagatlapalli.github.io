@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ap</title>
+    <link rel="stylesheet" href="css/styles.css">    
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+          font-family: 'JetBrains Mono';
+        }
+      </style>
+</head>
+<body>
+
+    <div class="header">
+        <div class="contentLinks">
+            <a href="#projects">projects</a>
+            <a href="#about">about</a>
+            <a href="#playlists">playlists</a>
+            <a href="#readings">readings</a>
+            <a href="#contact">contact</a>
+        </div>
+        <div class="titleContainer">
+            <div id="typedTitle"></div>
+            <div class="cursor"></div>
+        </div>
+    </div>
+
+    <button id="toggleBackground" aria-label="Switch to light theme">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun" style="display: none;"></i>
+    </button>
+    
+
+    <div class="scene">
+        <div class="cube">
+            <!-- Bird elements -->
+            <!-- ... -->
+
+            <!-- Cube faces -->
+            <div class="front"></div>
+            <div class="back"></div>
+            <div class="left"></div>
+            <div class="right"></div>
+            <div class="top"></div>
+            <div class="bottom"></div>
+        </div>
+    </div>
+
+
+    <div class="contentLinks">
+        <a href="projects.html">projects</a>
+        <a href="about.html">about</a>
+        <a href="playlists.html">playlists</a>
+        <a href="readings.html">readings</a>
+        <a href="contact.html">contact</a>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/three@0.141.0/build/three.min.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
