@@ -46,7 +46,7 @@ body {
   }
 
 
-  .titleContainer {
+.titleContainer {
     font-size: 2em;
     position: absolute;
     top: 5%;
@@ -55,6 +55,7 @@ body {
     display: flex;
     white-space: nowrap;
     color: #00ff08cc; /* This sets the font color to white */
+    padding-top: -10px; /* Adjust this value so the title doesn't overlap with the navbar */
 }
 
 .cursor {
@@ -101,15 +102,21 @@ body {
     transform: translateY(-50%);
 }
 
+/* Adjust the top value as needed to properly position the navigation links */
 .contentLinks {
     position: absolute;
-    top: 20%;
+    top: 120px; /* Adjust this value to position the navigation bar correctly */
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     display: flex;
     gap: 50px;
+    z-index: 100; /* Keeps the navbar above other content */
 }
 
+/* Add padding to the top of your main-container to push down the content */
+.main-container {
+    padding-top: -100px; /* Adjust this value based on the actual height of your navigation bar */
+}
 
 .contentLinks a {
     color: rgba(0, 255, 8, 0.8);  /* Adjust as needed */
@@ -124,6 +131,8 @@ body {
         background-color: rgba(0, 255, 8, 0.8);
     }
 }
+
+
 
 /* Media query for smaller screens */
 @media (max-width: 768px) {
@@ -144,4 +153,56 @@ body {
 .black-text {
     color: #000000; /* Black color */
 }
+
+/* Use consistent margin-top for all projects */
+.project {
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    margin-top: 20px; /* Add space above each project */
+    margin-bottom: 20px; /* Add space below each project */
+    padding: 20px;
+    max-width: 1000px;
+}
+
+  .project img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  .project h2 {
+    color: #333;
+  }
+  
+  .project p {
+    color: #666;
+  }
+
+  .projects-container {
+    width: 100%; /* Ensures the container takes the full width */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers the projects */
+}
+  
+  
+  .project-description {
+    flex: 1; /* allows the text to fill the space next to the image */
+    padding-right: 20px;
+  }
+  
+  .project img {
+    max-width: 25%; /* Adjust this value as needed */
+    height: auto;
+    float:left;
+    margin-right: 20px;
+  } 
+
+  .learn-more {
+    color: #0066cc;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+
 

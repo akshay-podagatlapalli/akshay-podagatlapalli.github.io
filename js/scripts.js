@@ -186,3 +186,4 @@ function onDocumentMouseMove(event) {
 document.addEventListener('mousemove', onDocumentMouseMove, false);
 
 init();
+  
