@@ -110,12 +110,7 @@ body {
     transform: translateX(-50%);
     display: flex;
     gap: 50px;
-    z-index: 100; /* Keeps the navbar above other content */
-}
-
-/* Add padding to the top of your main-container to push down the content */
-.main-container {
-    padding-top: -100px; /* Adjust this value based on the actual height of your navigation bar */
+    z-index: 1000; /* Keeps the navbar above other content */
 }
 
 .contentLinks a {
@@ -154,55 +149,92 @@ body {
     color: #000000; /* Black color */
 }
 
-/* Use consistent margin-top for all projects */
-.project {
-    background-color: #fff;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-top: 20px; /* Add space above each project */
-    margin-bottom: 20px; /* Add space below each project */
-    padding: 20px;
+.main-container {
+    padding-top: 1200px;
+    padding-bottom: 100px;
+    width: 90%;
     max-width: 1000px;
+    margin: 100;
 }
 
-  .project img {
-    width: 100%;
-    height: auto;
-    border-radius: 8px;
-  }
-  
-  .project h2 {
-    color: #333;
-  }
-  
-  .project p {
+:root {
+    --box-bg-color: #ffffff; /* Light mode background color for boxes */
+    --box-text-color: #000000; /* Light mode text color for boxes */
+    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for light mode */
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --box-bg-color: #333333; /* Dark mode background color for boxes */
+        --box-text-color: #dddddd; /* Dark mode text color for boxes */
+        --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Box shadow for dark mode */
+    }
+}
+
+
+.projects-container {
+    width: 100%; /* full width */
+    display: flex; /* use flexbox for layout */
+    flex-direction: column; /* stack children vertically */
+    gap: 2rem; /* space between projects */
+    margin-top: 2rem; /* space below header/nav */
+}
+
+.project {
+    background-color: var(--box-bg-color);
+    box-shadow: var(--box-shadow);
+    color: var(--box-text-color);
+    padding: 1rem; /* space inside the project box */
+    margin-bottom: 2rem; /* space between project boxes */
+    display: flex; /* Aligns children (image and info) side by side */
+    align-items: center; /* Centers children vertically */
+    gap: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.project:hover {
+    box-shadow:
+        0 0 10px rgba(57, 255, 20, 0.8), /* Inner green glow */
+        0 0 20px rgba(57, 255, 20, 0.6), /* Mid green glow */
+        0 0 40px rgba(57, 255, 20, 0.4), /* Outer green glow */
+        0 0 60px rgba(57, 255, 20, 0.2); /* Far green glow */
+}
+
+.project-image {
+    /* No specific styles needed, but you could control the image size here */
+    flex-shrink: 0; /* Prevents the image from shrinking */
+}
+
+.project img {
+    width: 300px; /* responsive image */
+    height: auto; /* maintain aspect ratio */
+    display: block; /* prevent inline spacing */
+    margin-bottom: 1rem; /* space below the image */
+}
+
+.project h2 {
+    color: var(--box-text-color);
+    margin-bottom: 0.5rem; /* space below the title */
+    font-size: 1.5rem; /* adjust size as needed */
+}
+
+.project p {
+    margin-bottom: 1rem;
     color: #666;
-  }
-
-  .projects-container {
-    width: 100%; /* Ensures the container takes the full width */
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers the projects */
 }
-  
-  
-  .project-description {
-    flex: 1; /* allows the text to fill the space next to the image */
-    padding-right: 20px;
-  }
-  
-  .project img {
-    max-width: 25%; /* Adjust this value as needed */
-    height: auto;
-    float:left;
-    margin-right: 20px;
-  } 
 
-  .learn-more {
+.learn-more {
     color: #0066cc;
     text-decoration: none;
     font-weight: bold;
-  }
+}
 
-
-
+/* Responsive design adjustments if needed */
+@media screen and (max-width: 600px) {
+    .header {
+        height: auto; /* Allow the header to expand as needed */
+    }
+    .main-container {
+        padding-top: 4rem; /* Increase padding-top to accommodate the taller header */
+    }
+}
