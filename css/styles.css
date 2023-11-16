@@ -5,23 +5,36 @@ body, body a, body button, body a:hover, body button:hover, body a:focus, body b
 
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'JetBrains Mono', monospace;
     background-color: #000000; /* Default background color */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
     transition: background-color 0.3s ease; /* Smooth transition for background color change */
+    margin: 0; /* Reset default margin */
+    /* Removed display flex, justify-content, and align-items */
 }
 
+.spacer {
+    height: -10px; /* Adjust this value as needed */
+    width: 100%;
+    display: block;
+}
+
+/* Add centering to .main-content if needed */
+.main-content {
+    position: absolute; /* Position it over the scene */
+    bottom: 0px; /* Align to the bottom */
+    left: 0; /* Align to the left */
+    right: 0; /* Align to the right */
+    margin-bottom: 0px; /* Add some space from the bottom edge */
+    z-index: 10;
+}
 
 .scene {
-    width: 200px;
-    height: 200px;
-    position: relative;
-    transform-style: preserve-3d;
-    transform: rotateX(0deg) rotateY(0deg);
-    background: none;
+    position: absolute; /* Position it absolutely */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    right: 0; /* Align to the right */
+    bottom: 0; /* Align to the bottom */
+    z-index: -1; /* Ensure it's behind the main content */
 }
 
 #toggleBackground {
@@ -29,7 +42,7 @@ body {
     top: 20px;
     right: 20px;
     padding: 10px 15px;
-    z-index: 1000;
+    z-index: 10;
     background: none;
     border: none;
     color: white; /* Or any color that matches your design */
@@ -237,4 +250,30 @@ body {
     .main-container {
         padding-top: 4rem; /* Increase padding-top to accommodate the taller header */
     }
+}
+
+.profile-section {
+    text-align: center;
+    margin: 0 auto;
+    max-width: 600px;
+}
+
+.profile-photo {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    margin: 20px auto;
+    display: block;
+}
+
+.greeting {
+    font-size: 1.2em; /* Adjust size as necessary */
+    color: rgba(0, 255, 8, 0.8); /* Adjust color as necessary */
+    margin-top: 10px;
+}
+
+.introduction {
+    font-size: 1em;
+    color: rgba(0, 255, 8, 0.8); /* Adjust color as necessary */
+    margin-top: 10px;
 }

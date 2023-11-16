@@ -55,37 +55,38 @@ document.addEventListener('DOMContentLoaded', function () {
     const sunIcon = toggleButton.querySelector('.fa-sun');
 
     // Function to update the theme
-    function updateTheme(isBoneWhite) {
-        if (isBoneWhite) {
-            document.body.classList.add('bone-white-background');
-            document.body.classList.remove('black-background');
-            moonIcon.style.display = 'none';
-            sunIcon.style.display = 'block';
-            toggleButton.setAttribute('aria-label', 'Switch to dark theme');
-        } else {
+    function updateTheme(isBlackBackground) {
+        if (isBlackBackground) {
             document.body.classList.remove('bone-white-background');
             document.body.classList.add('black-background');
             moonIcon.style.display = 'block';
             sunIcon.style.display = 'none';
             toggleButton.setAttribute('aria-label', 'Switch to light theme');
+        } else {
+            document.body.classList.add('bone-white-background');
+            document.body.classList.remove('black-background');
+            moonIcon.style.display = 'none';
+            sunIcon.style.display = 'block';
+            toggleButton.setAttribute('aria-label', 'Switch to dark theme');
         }
         // Save the current theme state to localStorage
-        localStorage.setItem('theme', 'boneWhite');
+        localStorage.setItem('theme', isBlackBackground ? 'black' : 'boneWhite');
     }
 
     // Event listener for the toggle button
     toggleButton.addEventListener('click', function () {
-        // Get the current theme state from localStorage
-        let isBoneWhite = localStorage.getItem('theme') === 'boneWhite';
-        updateTheme(!isBoneWhite);
+        // Toggle the theme state
+        let isBlackBackground = localStorage.getItem('theme') !== 'black';
+        updateTheme(isBlackBackground);
         // Save the new theme state to localStorage
-        localStorage.setItem('theme', isBoneWhite ? 'black' : 'boneWhite');
+        localStorage.setItem('theme', isBlackBackground ? 'black' : 'boneWhite');
     });
 
     // Apply the theme when the page loads
-    let isBoneWhite = localStorage.getItem('theme') === 'boneWhite';
-    updateTheme(isBoneWhite);
+    let isBlackBackground = localStorage.getItem('theme') !== 'boneWhite';
+    updateTheme(isBlackBackground);
 });
+
 
 
 let scene, camera, renderer, cubes = [];
