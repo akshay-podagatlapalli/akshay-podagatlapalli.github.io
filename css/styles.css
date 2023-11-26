@@ -20,12 +20,13 @@ body {
 
 /* Add centering to .main-content if needed */
 .main-content {
-    position: absolute; /* Position it over the scene */
     bottom: 0px; /* Align to the bottom */
     left: 0; /* Align to the left */
     right: 0; /* Align to the right */
     margin-bottom: 0px; /* Add some space from the bottom edge */
     z-index: 10;
+    height: 500px;
+    width: 100%;
 }
 
 .scene {
@@ -253,10 +254,26 @@ body {
 }
 
 .profile-section {
+    position: absolute;
+    top: 60%; /* Adjust this value to push the box down */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2; /* Above the scene */
     text-align: center;
-    margin: 0 auto;
-    max-width: 600px;
+    width: 40%; /* Reduce width */
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent background for readability */
+    padding: 20px;
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Optional: adds subtle shadow for depth */
 }
+
+.profile-photo {
+    width: 200px;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
 
 .profile-photo {
     width: 250px;
@@ -276,4 +293,12 @@ body {
     font-size: 1em;
     color: rgba(0, 255, 8, 0.8); /* Adjust color as necessary */
     margin-top: 10px;
+}
+
+/* Add responsive design for smaller screens */
+@media (max-width: 768px) {
+    .profile-section {
+        width: 80%; /* Increase width on smaller screens if necessary */
+        top: 70%; /* Adjust top position for smaller screens */
+    }
 }
