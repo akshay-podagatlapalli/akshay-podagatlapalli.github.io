@@ -1,43 +1,42 @@
-/* Global cursor style */
-body, body a, body button, body a:hover, body button:hover, body a:focus, body button:focus {
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><circle cx="16" cy="16" r="10" fill="%2300FF00" stroke="black" stroke-width="2"/></svg>'), auto !important;
-}
-
-
+/* Global Styles */
 body {
     font-family: 'JetBrains Mono', monospace;
-    background-color: #000000; /* Default background color */
-    transition: background-color 0.3s ease; /* Smooth transition for background color change */
-    margin: 0; /* Reset default margin */
-    /* Removed display flex, justify-content, and align-items */
+    background-color: #000000;
+    margin: 0;
+    transition: background-color 0.3s ease;
 }
 
-.spacer {
-    height: -10px; /* Adjust this value as needed */
+html, body {
     width: 100%;
-    display: block;
+    height: 100%;
+    margin: 0;
 }
 
-/* Add centering to .main-content if needed */
-.main-content {
-    bottom: 0px; /* Align to the bottom */
-    left: 0; /* Align to the left */
-    right: 0; /* Align to the right */
-    margin-bottom: 0px; /* Add some space from the bottom edge */
-    z-index: 10;
-    height: 500px;
+canvas {
+    display: block; /* Prevents extra space below the canvas */
     width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
-.scene {
-    position: absolute; /* Position it absolutely */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    right: 0; /* Align to the right */
-    bottom: 0; /* Align to the bottom */
-    z-index: -1; /* Ensure it's behind the main content */
+/* Global cursor style */
+body, body * {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><circle cx="16" cy="16" r="10" fill="%2300FF00" stroke="black" stroke-width="2"/></svg>'), auto;
 }
 
+
+.threejs-container {
+    position: relative;
+    top: 0;
+    left: 0;
+    z-index: 0; /* Base layer */
+    width: 100%;
+    height: 100vh; /* Adjust if necessary */
+}
+
+/* Toggle Button */
 #toggleBackground {
     position: fixed;
     top: 20px;
@@ -46,259 +45,119 @@ body {
     z-index: 10;
     background: none;
     border: none;
-    color: white; /* Or any color that matches your design */
+    color: white;
 }
 
 #toggleBackground .fas {
-    font-size: 1.5em; /* Adjust size as needed */
+    font-size: 1.5em;
 }
 
-
-.cube-container {
-    width: 100%;
-    height: 100%;
-  }
-
-
-.titleContainer {
-    font-size: 2em;
-    position: absolute;
-    top: 5%;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    white-space: nowrap;
-    color: #00ff08cc; /* This sets the font color to white */
-    padding-top: -10px; /* Adjust this value so the title doesn't overlap with the navbar */
-}
-
-.cursor {
-    content: "";
-    display: inline-block;
-    width: 0.5em; /* Set the width to match height for a circle */
-    height: 0.5em; /* Set the height you want for the circle */
-    background-color: rgba(0, 255, 8, 0.8);
-    border-radius: 50%; /* This makes the cursor a circle */
-    animation: blink 1s infinite alternate;
-    vertical-align: middle; /* Align the cursor vertically with the text */
-    margin-bottom: 0.2em; /* Adjust as needed to center with the text */
-}
-
-/* Background Color Classes */
 .bone-white-background {
-    background-color: #e3dac9; /* Bone white color */
+    background-color: #fff5ee; /* Bone white color */
 }
 
 .black-background {
     background-color: #000000; /* Ensuring default black color is set here for clarity */
 }
+ 
+
+/* Title Container */
+.titleContainer {
+    font-size: 2em;
+    position: absolute;
+    top: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    white-space: nowrap;
+    color: #00ff08cc;
+    z-index: 3;
+}
+
+.cursor {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    background-color: rgba(0, 255, 8, 0.8);
+    border-radius: 50%;
+    animation: blink 1s infinite alternate;
+    vertical-align: middle;
+    margin-bottom: 0.2em;
+}
 
 @keyframes blink {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+    from { opacity: 1; }
+    to { opacity: 0; }
 }
 
-.ribbon {
-    position: absolute;
-    top: 50%;
-    left: 0;
-    right: 0;
-    height: 50px; 
-    background-color: rgb(255, 255, 255);
-    z-index: 100; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transform: translateY(-50%);
-}
-
-/* Adjust the top value as needed to properly position the navigation links */
+/* Navigation Links */
 .contentLinks {
     position: absolute;
-    top: 120px; /* Adjust this value to position the navigation bar correctly */
+    top: 120px;
     left: 50%;
     transform: translateX(-50%);
     display: flex;
     gap: 50px;
-    z-index: 1000; /* Keeps the navbar above other content */
+    z-index: 3;
 }
 
 .contentLinks a {
-    color: rgba(0, 255, 8, 0.8);  /* Adjust as needed */
+    color: rgba(0, 255, 8, 0.8);
     text-decoration: none;
     padding: 10px 20px;
-    background-color: rgba(0,0,0,0.6);
+    background-color: rgba(21, 19, 19, 0.6);
     border-radius: 10px;
     transition: background-color 0.3s ease;
-    white-space: nowrap; /* Prevents the text from wrapping */
-    /* Optional: Add hover effect */
-    &:hover {
-        background-color: rgba(0, 255, 8, 0.8);
-    }
 }
 
-
-
-/* Media query for smaller screens */
-@media (max-width: 768px) {
-    .contentLinks {
-        justify-content: flex-start; /* Aligns items to the start of the container */
-    }
-
-    .contentLinks a {
-        padding: 5px 10px; /* Reduces padding on smaller screens */
-        font-size: 0.8em; /* Reduces font size on smaller screens */
-    }
+.contentLinks a:hover {
+    background-color: rgba(0, 255, 8, 0.8);
 }
 
-.white-text {
-    color: #FFFFFF; /* White color */
-}
-
-.black-text {
-    color: #000000; /* Black color */
-}
-
-.main-container {
-    padding-top: 1200px;
-    padding-bottom: 100px;
-    width: 90%;
-    max-width: 1000px;
-    margin: 100;
-}
-
-:root {
-    --box-bg-color: #ffffff; /* Light mode background color for boxes */
-    --box-text-color: #000000; /* Light mode text color for boxes */
-    --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for light mode */
-}
-
-@media (prefers-color-scheme: dark) {
-    :root {
-        --box-bg-color: #333333; /* Dark mode background color for boxes */
-        --box-text-color: #dddddd; /* Dark mode text color for boxes */
-        --box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Box shadow for dark mode */
-    }
-}
-
-
-.projects-container {
-    width: 100%; /* full width */
-    display: flex; /* use flexbox for layout */
-    flex-direction: column; /* stack children vertically */
-    gap: 2rem; /* space between projects */
-    margin-top: 2rem; /* space below header/nav */
-}
-
-.project {
-    background-color: var(--box-bg-color);
-    box-shadow: var(--box-shadow);
-    color: var(--box-text-color);
-    padding: 1rem; /* space inside the project box */
-    margin-bottom: 2rem; /* space between project boxes */
-    display: flex; /* Aligns children (image and info) side by side */
-    align-items: center; /* Centers children vertically */
-    gap: 20px;
-    transition: box-shadow 0.3s ease-in-out;
-}
-
-.project:hover {
-    box-shadow:
-        0 0 10px rgba(57, 255, 20, 0.8), /* Inner green glow */
-        0 0 20px rgba(57, 255, 20, 0.6), /* Mid green glow */
-        0 0 40px rgba(57, 255, 20, 0.4), /* Outer green glow */
-        0 0 60px rgba(57, 255, 20, 0.2); /* Far green glow */
-}
-
-.project-image {
-    /* No specific styles needed, but you could control the image size here */
-    flex-shrink: 0; /* Prevents the image from shrinking */
-}
-
-.project img {
-    width: 300px; /* responsive image */
-    height: auto; /* maintain aspect ratio */
-    display: block; /* prevent inline spacing */
-    margin-bottom: 1rem; /* space below the image */
-}
-
-.project h2 {
-    color: var(--box-text-color);
-    margin-bottom: 0.5rem; /* space below the title */
-    font-size: 1.5rem; /* adjust size as needed */
-}
-
-.project p {
-    margin-bottom: 1rem;
-    color: #666;
-}
-
-.learn-more {
-    color: #0066cc;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-/* Responsive design adjustments if needed */
-@media screen and (max-width: 600px) {
-    .header {
-        height: auto; /* Allow the header to expand as needed */
-    }
-    .main-container {
-        padding-top: 4rem; /* Increase padding-top to accommodate the taller header */
-    }
-}
-
-.profile-section {
-    position: absolute;
-    top: 60%; /* Adjust this value to push the box down */
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 2; /* Above the scene */
-    text-align: center;
-    width: 40%; /* Reduce width */
-    background: rgba(0, 0, 0, 0.8); /* Semi-transparent background for readability */
+.about-me {
+    position: relative; /* It follows the normal document flow */
+    z-index: 2; /* Below the title and navigation bar */
+    margin-top: 300px; /* Adjust this value to fit below the navigation bar */
+    background-color: rgba(0, 255, 8, 0.5); /* Semi-transparent green background */
     padding: 20px;
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.2); /* Optional: adds subtle shadow for depth */
+    overflow: auto;
+    color: #ffffff; /* Text color, choose a color that is readable on the semi-transparent background */
 }
 
-.profile-photo {
-    width: 200px;
-    height: auto;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-
-
-.profile-photo {
-    width: 250px;
-    height: 250px;
-    border-radius: 50%;
-    margin: 20px auto;
+  
+ 
+  @keyframes wave {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(14deg); }
+    100% { transform: rotate(0deg); }
+ }
+ 
+ .wave {
+    display: inline-block;
+    animation: wave 1s infinite;
+ }
+ 
+ html {
+    scroll-behavior: smooth;
+ }
+ 
+ .profile-image {
+    width: 250px; /* Adjust the width as needed */
+    height: 250px; /* Adjust the height as needed */
+    border-radius: 50%; /* This will make it round */
+    object-fit: cover; /* This will ensure the image covers the area without stretching */
     display: block;
+    margin: 0 auto; /* This centers the image in the section */
 }
 
-.greeting {
-    font-size: 1.2em; /* Adjust size as necessary */
-    color: rgba(0, 255, 8, 0.8); /* Adjust color as necessary */
-    margin-top: 10px;
-}
-
-.introduction {
-    font-size: 1em;
-    color: rgba(0, 255, 8, 0.8); /* Adjust color as necessary */
-    margin-top: 10px;
-}
-
-/* Add responsive design for smaller screens */
-@media (max-width: 768px) {
-    .profile-section {
-        width: 80%; /* Increase width on smaller screens if necessary */
-        top: 70%; /* Adjust top position for smaller screens */
-    }
+.site-footer {
+    text-align: center;
+    padding: 20px 0;
+    background-color: #222;
+    color: #fff;
+    font-size: 0.9em;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
 }

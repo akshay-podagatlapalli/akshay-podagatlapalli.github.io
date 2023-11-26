@@ -87,104 +87,120 @@ document.addEventListener('DOMContentLoaded', function () {
     updateTheme(isBlackBackground);
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    let scene, camera, renderer, cubes = [];
+    let mouse = { x: 0, y: 0 };
+    let cubeCount = 10; // Number of cubes
+    let mouseEffect = []; // To store the effect of the mouse on each cube
+    let cubeRotations = []; // To store rotation data for each cube
 
+    function init() {
+        // Set up the scene
+        scene = new THREE.Scene();
+        camera = new THREE.PerspectiveCamera(100, window.innerWidth / window.innerHeight, 0.1, 1000);
+        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setClearColor(0x000000, 0); // Fully transparent
+        renderer.setSize(window.innerWidth, window.innerHeight);
 
-let scene, camera, renderer, cubes = [];
-let mouse = { x: 0, y: 0 };
-let cubeCount = 10; // Number of cubes
-let mouseEffect = []; // To store the effect of the mouse on each cube
-let cubeRotations = []; // To store rotation data for each cube
+        // Append the renderer to the threejs-container
+        document.body.appendChild(renderer.domElement);
+        const container = document.getElementById('threejs-container');
+        if (container) {
+            container.appendChild(renderer.domElement);
+        } else {
+            console.error('threejs-container not found');
+            return;
+        }
 
-function init() {
-    // Set up the scene
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-    renderer.setClearColor(0x000000, 0); // the second parameter is the opacity, 0 for fully transparent
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
+        // Add cubes
+        for (let i = 0; i < cubeCount; i++) {
+            const size = Math.random() * 0.5 + 0.5;
+            const geometry = new THREE.BoxGeometry(size, size, size);
+            const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+            const cube = new THREE.Mesh(geometry, material);
+            cube.position.x = (Math.random() - 0.5) * 10;
+            cube.position.y = (Math.random() - 0.5) * 10;
+            cube.position.z = (Math.random() - 0.5) * 10;
+            scene.add(cube);
+            cubes.push(cube); // Store cube reference for later manipulation
 
-    // Add cubes
-    for (let i = 0; i < cubeCount; i++) {
-        const size = Math.random() * 0.5 + 0.5;
-        const geometry = new THREE.BoxGeometry(size, size, size);
-        const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
-        const cube = new THREE.Mesh(geometry, material);
-        cube.position.x = (Math.random() - 0.5) * 10;
-        cube.position.y = (Math.random() - 0.5) * 10;
-        cube.position.z = (Math.random() - 0.5) * 10;
-        scene.add(cube);
-        cubes.push(cube); // Store cube reference for later manipulation
+            // Store a random effect for each cube
+            mouseEffect.push({
+                x: (Math.random() - 0.5) * 2,
+                y: (Math.random() - 0.5) * 2
+            });
+            
+            // Store initial rotation and rotation velocity for each cube
+            cubeRotations.push({
+                x: Math.random() * 0.005 - 0.0025,
+                y: Math.random() * 0.005 - 0.0025,
+                z: Math.random() * 0.005 - 0.0025,
+                velX: Math.random() * 0.01 - 0.005,
+                velY: Math.random() * 0.01 - 0.005,
+                velZ: Math.random() * 0.01 - 0.005,
+            });
+        }
 
-        // Store a random effect for each cube
-        mouseEffect.push({
-            x: (Math.random() - 0.5) * 2,
-            y: (Math.random() - 0.5) * 2
+        // Camera position
+        camera.position.z = 5;
+
+        // Handle window resize
+        window.addEventListener('resize', onWindowResize, false);
+
+        // Start the animation loop
+        animate();
+    }
+
+    function onWindowResize() {
+        // Update the size of the renderer and the camera aspect ratio on resize
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    window.addEventListener('resize', onWindowResize, false);
+    
+    function animate() {
+        requestAnimationFrame(animate);
+
+        // Update cube positions and rotations
+        cubes.forEach((cube, index) => {
+            let factor = (index + 1) * 0.05;
+            let effect = mouseEffect[index];
+            let rotation = cubeRotations[index];
+
+            // Position with easing
+            cube.position.x += ((mouse.x * effect.x) - cube.position.x) * factor;
+            cube.position.y += ((mouse.y * effect.y) - cube.position.y) * factor;
+
+            // Rotation with easing
+            cube.rotation.x += (rotation.velX - cube.rotation.x) * factor;
+            cube.rotation.y += (rotation.velY - cube.rotation.y) * factor;
+            cube.rotation.z += (rotation.velZ - cube.rotation.z) * factor;
+
+            // Update rotation velocities for a continuous rotation effect
+            rotation.velX += (rotation.x - cube.rotation.x) * factor;
+            rotation.velY += (rotation.y - cube.rotation.y) * factor;
+            rotation.velZ += (rotation.z - cube.rotation.z) * factor;
         });
-        
-        // Store initial rotation and rotation velocity for each cube
-        cubeRotations.push({
-            x: Math.random() * 0.005 - 0.0025,
-            y: Math.random() * 0.005 - 0.0025,
-            z: Math.random() * 0.005 - 0.0025,
-            velX: Math.random() * 0.01 - 0.005,
-            velY: Math.random() * 0.01 - 0.005,
-            velZ: Math.random() * 0.01 - 0.005,
+
+        renderer.render(scene, camera);
+    }
+
+    function onDocumentMouseMove(event) {
+        // Update the mouse variable
+        mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
+        mouse.y = (event.clientY / window.innerHeight) * 2 - 1;
+
+        // Corrected rotation handling for each cube
+        cubes.forEach(cube => {
+            cube.rotation.x = mouse.y * 0.01;
+            cube.rotation.y = mouse.x * 0.01;
         });
     }
 
-    // Camera position
-    camera.position.z = 5;
+    document.addEventListener('mousemove', onDocumentMouseMove, false);
 
-    // Handle window resize
-    window.addEventListener('resize', onWindowResize, false);
-
-    // Start the animation loop
-    animate();
-}
-
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-}
-
-function animate() {
-    requestAnimationFrame(animate);
-
-    // Update cube positions and rotations
-    cubes.forEach((cube, index) => {
-        let factor = (index + 1) * 0.05;
-        let effect = mouseEffect[index];
-        let rotation = cubeRotations[index];
-
-        // Position with easing
-        cube.position.x += ((mouse.x * effect.x) - cube.position.x) * factor;
-        cube.position.y += ((mouse.y * effect.y) - cube.position.y) * factor;
-
-        // Rotation with easing
-        cube.rotation.x += (rotation.velX - cube.rotation.x) * factor;
-        cube.rotation.y += (rotation.velY - cube.rotation.y) * factor;
-        cube.rotation.z += (rotation.velZ - cube.rotation.z) * factor;
-
-        // Update rotation velocities for a continuous rotation effect
-        rotation.velX += (rotation.x - cube.rotation.x) * factor;
-        rotation.velY += (rotation.y - cube.rotation.y) * factor;
-        rotation.velZ += (rotation.z - cube.rotation.z) * factor;
-    });
-
-    renderer.render(scene, camera);
-}
-
-function onDocumentMouseMove(event) {
-    // Update the mouse variable
-    mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
-    mouse.y = (event.clientY / window.innerHeight) * 2 - 1;
-    cubes.rotation.x = event.clientY * 0.01;
-    cubes.rotation.y = event.clientX * 0.01;
-}
-
-document.addEventListener('mousemove', onDocumentMouseMove, false);
-
-init();
+    init();
   
+});
