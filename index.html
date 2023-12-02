@@ -12,6 +12,7 @@
           font-family: 'JetBrains Mono';
         }
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
 </head>
 
 <body>
@@ -45,21 +46,55 @@
         <i class="fas fa-sun"></i>
     </button>
     
+    
     <!-- About Me Section -->
-    <section class="about-me">
-        <h2>Hi there!<span class="wave">👋</span></h2>
+    <section class="about-me" :style="{ 'margin-top': aboutMePosition + 'px' }">
+        <h2>Hello World!<span class="wave">👋</span></h2>
         <img src="images/headshot - Copy.jpg" alt="AP" class="profile-image">
-        <p>Welcome to my website! I'm Akshay, a Data Scientist. 
-            Here, I share my projects, thoughts, and ideas. Feel free to browse 
-            around and learn more about my work!</p>
+        <p>Thanks for checking out this page! I'm Akshay, a jack of all trades.</p> 
+        
+        <p>Here, you can find some of the projects that I have worked on and lastest music and books
+            that I am listening to or listening to or reading! 
+        </p>
+
+        <p>I have experience in using different languages and technologies such as: </p>
+
+        <img src="path/to/logo1.png" alt="Technology Logo 1" title="Technology Name 1">
+        <img src="path/to/logo2.png" alt="Technology Logo 2" title="Technology Name 2">
+        <!-- Add more logos as needed -->
     </section>
+
+    <section>
+        <p><br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+          </p>
+    </section>
+   
+    <footer>
+        <p>Copyright © 2023 Akshay Podagatlapalli</p>
+        <p>Contact Us: akshay.podagatlapalli@gmail.com</p>
+        <p><a href="terms.html">Terms of Service</a> | <a href="privacy.html">Privacy Policy</a></p>
+    </footer>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/three@0.141.0/build/three.min.js"></script>
     <script src="js/scripts.js"></script>
 
-    <footer class="site-footer">
-        <p>&copy; 2023 Akshay Podagatlapalli. All Rights Reserved.</p>
-    </footer>
 </body>
 
 

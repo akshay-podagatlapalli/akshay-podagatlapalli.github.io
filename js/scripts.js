@@ -204,3 +204,12 @@ document.addEventListener('DOMContentLoaded', function () {
     init();
   
 });
+
+window.addEventListener('scroll', function() {
+    var footer = document.querySelector('.site-footer');
+    if (window.scrollY > window.innerHeight) { // Adjust the value as needed
+        footer.classList.add('visible');
+    } else {
+        footer.classList.remove('visible');
+    }
+});
