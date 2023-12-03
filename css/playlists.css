@@ -1,0 +1,129 @@
+/* Global Styles */
+body {
+    font-family: 'JetBrains Mono', monospace;
+    background-color: #000000;
+    margin: 0;
+    transition: background-color 0.3s ease;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+canvas {
+    display: fixed; /* Prevents extra space below the canvas */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* Global cursor style */
+body, body * {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><circle cx="16" cy="16" r="10" fill="%2300FF00" stroke="black" stroke-width="2"/></svg>'), auto;
+}
+
+/* Toggle Button */
+#toggleBackground {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    z-index: 10;
+    background: none;
+    border: none;
+    color: white;
+}
+
+#toggleBackground .fas {
+    font-size: 1.5em;
+}
+
+.bone-white-background {
+    background-color: #fff5ee; /* Bone white color */
+}
+
+.black-background {
+    background-color: #000000; /* Ensuring default black color is set here for clarity */
+}
+
+/* Title Container */
+.titleContainer {
+    font-size: 2em;
+    position: absolute;
+    top: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    white-space: nowrap;
+    color: #00ff08cc;
+    z-index: 3;
+}
+
+.cursor {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    background-color: rgba(0, 255, 8, 0.8);
+    border-radius: 50%;
+    animation: blink 1s infinite alternate;
+    vertical-align: middle;
+    margin-bottom: 0.2em;
+}
+
+@keyframes blink {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Navigation Links */
+.contentLinks {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 50px;
+    z-index: 3;
+}
+
+.contentLinks a {
+    color: rgba(0, 255, 8, 0.8);
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: rgba(21, 19, 19, 0.6);
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.contentLinks a:hover {
+    background-color: rgba(0, 255, 8, 0.8);
+}
+
+/* Container for all playlists */
+.playlists-grid-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Creates a 3-column grid */
+    grid-gap: 5px; /* Space between grid items */
+    padding: 0px; /* Padding around the entire grid */
+    margin-top: 200px; /* Additional space from the top of the viewport, adjust as needed */
+    margin-left: 150px;
+}
+
+/* Individual playlist container */
+.spotify-iframe-container {
+    width: 80%; /* Adjust the width as needed */
+
+}
+
+
+footer {
+    font-size: 0.85em;
+    position: flex;
+    color: #00ff08cc;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}
