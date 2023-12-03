@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
         setTimeout(() => typeTitle("Projects", 'projectsElementId'), 500);
     }
 
-    if (document.getElementById('aboutElementId')) {
-        setTimeout(() => typeTitle("About", 'aboutElementId'), 500);
+    if (document.getElementById('resumeElementId')) {
+        setTimeout(() => typeTitle("Resume", 'resumeElementId'), 500);
     }
 
     if (document.getElementById('playlistsElementId')) {
@@ -58,13 +58,13 @@ document.addEventListener('DOMContentLoaded', function () {
     function updateTheme(isBlackBackground) {
         if (isBlackBackground) {
             document.body.classList.remove('bone-white-background');
-            document.body.classList.add('black-background');
+            document.body.classList.add('black-background', 'dark-theme');
             moonIcon.style.display = 'block';
             sunIcon.style.display = 'none';
             toggleButton.setAttribute('aria-label', 'Switch to light theme');
         } else {
             document.body.classList.add('bone-white-background');
-            document.body.classList.remove('black-background');
+            document.body.classList.remove('black-background', 'dark-theme');
             moonIcon.style.display = 'none';
             sunIcon.style.display = 'block';
             toggleButton.setAttribute('aria-label', 'Switch to dark theme');

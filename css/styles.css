@@ -27,7 +27,7 @@ body, body * {
 
 
 .threejs-container {
-    position: flex;
+    display: flex;
     top: 0;
     left: 0;
     z-index: ; /* Base layer */
@@ -58,7 +58,7 @@ body, body * {
 .black-background {
     background-color: #000000; /* Ensuring default black color is set here for clarity */
 }
- 
+
 
 /* Title Container */
 .titleContainer {
@@ -144,26 +144,182 @@ body, body * {
     margin: 0 auto; /* This centers the image in the section */
 }
 
+:root {
+    --box-text-color: #000; /* Dark color for light background */
+    --paragraph-text-color: #666; /* Grey color for paragraphs */
+    --link-text-color: #0066cc; /* Blue color for links */
+}
+
+/* Inverted colors for dark theme */
+.dark-theme {
+    --box-text-color: #fff; /* Light color for dark background */
+    --paragraph-text-color: #aaa; /* Lighter grey color for paragraphs */
+    --link-text-color: #66ccff; /* Lighter blue color for links */
+}
+
 .about-me {
-    position: relative; /* Adjusted from 'grid' to 'relative' for natural document flow */
+    position: relative;
     z-index: 2;
-    margin-top: 0px; /* Keep at '0' if you don't want any space above the section */
+    margin-top: 0px;
     background-color: rgba(0, 255, 8, 0.5); /* Semi-transparent green */
-    color: #ffffff; /* White text color */
-    width: auto; /* Adjust width as needed, or use 'auto' */
-    max-width: 960px; /* This will ensure that the section doesn't get too wide. Adjust as necessary. */
-    margin-left: auto; /* Centers the section if width is less than 100% */
-    margin-right: auto; /* Centers the section if width is less than 100% */
-    padding: 20px; /* Adds space inside the section, around the text. Adjust as needed. */
-    box-sizing: border-box; /* Ensures padding is included in the width */
+    color: var(--box-text-color); /* Use CSS variable for text color */
+    width: auto;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.tech-logos {
+    text-align: center; /* Center the logos */
+    padding: 20px; /* Add some padding around the section */
+}
+
+.tech-logos img {
+    margin: 10px; /* Add space around each logo */
+    vertical-align: middle; /* Align logos nicely if they have different heights */
+    width: 75px; /* Set a fixed width for all logos */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.tech-logos2 {
+    text-align: center; /* Center the logos */
+    padding: 20px; /* Add some padding around the section */
+}
+
+.tech-logos2 img {
+    margin: 10px; /* Add space around each logo */
+    vertical-align: middle; /* Align logos nicely if they have different heights */
+    width: 95px; /* Set a fixed width for all logos */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Style for smaller screens */
+@media (max-width: 768px) {
+    .tech-logos img {
+        width: 100px; /* Smaller size for mobile screens */
+        height: auto;
+        margin: 3px;
+    }
 }
 
 
+.projects-container {
+    width: 80%; /* Adjust width as needed */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    gap: 2rem; /* Space between projects */
+    margin-top: 15rem; /* Adjust top margin as needed */
+    justify-content: flex-start; /* Align items to the start of the container, which is the default */
+    align-items: flex-start; /* Align items to the left (start) of the container */
+    margin-left: auto; /* Pushes the container to the right */
+}
+
+
+.project {
+    background-color: var(--box-bg-color);
+    box-shadow: var(--box-shadow);
+    color: var(--box-text-color);
+    padding: 1rem; /* space inside the project box */
+    margin-bottom: 2rem; /* space between project boxes */
+    display: flex; /* Aligns children (image and info) side by side */
+    align-items: center; /* Centers children vertically */
+    gap: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.project:hover {
+    box-shadow:
+        0 0 10px rgba(57, 255, 20, 0.8), /* Inner green glow */
+        0 0 20px rgba(57, 255, 20, 0.6), /* Mid green glow */
+        0 0 40px rgba(57, 255, 20, 0.4), /* Outer green glow */
+        0 0 60px rgba(57, 255, 20, 0.2); /* Far green glow */
+}
+
+.project-image {
+    /* No specific styles needed, but you could control the image size here */
+    flex-shrink: 0; /* Prevents the image from shrinking */
+}
+
+.project img {
+    width: 300px; /* responsive image */
+    height: auto; /* maintain aspect ratio */
+    display: block; /* prevent inline spacing */
+    margin-bottom: 1rem; /* space below the image */
+}
+
+.project h2 {
+    color: var(--box-text-color);
+    margin-bottom: 0.5rem; /* space below the title */
+    font-size: 1.5rem; /* adjust size as needed */
+}
+
+.project p {
+    margin-bottom: 1rem;
+    color: var(--paragraph-text-color);
+}
+
+.learn-more {
+    color: var(--link-text-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+body {
+    font-family: 'JetBrains Mono', monospace;
+    background-color: var(--background-color);
+    color: var(--box-text-color); /* Use CSS variable for text color */;
+    margin: 0;
+    padding: 20px;
+}
+
+.book-list {
+    max-width: 800px;
+    margin: auto;
+}
+
+.book-list h1 {
+    margin-top: 23vh; /* If the navbar height is around 10% of the viewport height */
+    /* Other styling for the heading */
+}
+
+.book-item {
+    border-bottom: 1px solid #333;
+    padding: 20px 0;
+}
+
+.book-cover {
+    max-width: 100px;
+    float: left;
+    margin-right: 20px;
+}
+
+.book-item h2 {
+    margin: 0;
+    padding-top: 5px;
+}
+
+.book-item p {
+    margin: 5px 0;
+}
+
+.book-description {
+    clear: both;
+}
+
+/* Clearfix for the float */
+.book-item:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 
 footer {
+    font-size: 0.85em;
     position: flex;
-    background-color: #333;
-    color: white;
+    color: #00ff08cc;
     text-align: center;
     padding: 10px 0;
     width: 100%;
