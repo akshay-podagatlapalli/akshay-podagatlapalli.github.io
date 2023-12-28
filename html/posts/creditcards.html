@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="../../images/ap.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>akshay podagatlapalli - Blog</title>
+    <link rel="stylesheet" href="../../css/blog.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'JetBrains Mono';
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="contentLinks">
+            <a href="../projects.html">projects</a>
+            <a href="../playlists.html">playlists</a>
+            <a href="../readings.html">readings</a>
+            <a href="../../docs/Akshay Podagatlapalli Resume.pdf" target="_blank">resume</a>
+        </div>
+        <div class="titleContainer">
+            <div id="projectsElementId"></div>
+            <div class="cursor"></div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Blog Post Section -->
+        <div class="blog-post">
+            <h1>
+                Elevating Credit Card Approvals: A Dual Approach with SVM and KNN Models for Eligibility Assessment</h1>
+            <p class="post-date">Posted on: [Date]</p>
+            <img src="../../images/credit-cards.png" alt="Sample Post Image" class="post-image">
+            <div class="post-content">
+                <!-- Begin Post Content -->
+
+                <h2>SVM Classifier - Linear</h2>
+                <p>The main goal of this project is to develop a good SVM classifier using the credit_card_data.txt data set. 
+                    The key hyperparameter, λ, referred to as `C`, is critical in this process. The methodology to determine 
+                    the best value for this hyperparameter is demonstrated below.</p>
+
+                <!-- Code snippets and explanations would go here -->
+                <pre><code>
+                    # Importing the necessary library for analysis
+                    library(kernlab)
+
+                    # Setting up the working directory data
+                    getwd()
+                    setwd("../data 2.2")
+                </code></pre>
+
+                <p>Having imported the necessary libraries and setup the working directory, the data set required for this
+                     analysis was called and stored within the `credit_card_dataH` variable. The data set was also converted 
+                     into a matrix datatype as this is the only datatype accepted by the `ksvm()` function.</p>
+                    
+                <pre><code>
+                    ### initializing a variable to store the data
+                    credit_card_dataH <-
+                        as.matrix(read.delim("credit_card_data-headers.txt"))
+                </code></pre>
+
+                <p>To identify the best C value, a trail and error approach was initially taken. 
+                    In this approach, the values used for C included:</p>
+                
+                <ol>
+                    <li>C = 1</li>
+                    <li>C = 10</li>
+                    <li>C = 100</li>
+                </ol>
+
+                <p>The accuracy of the model for each of the C values was calculated by dividing the sum of the total 
+                    number of correctly classified values by the model over the total number of correctly classified observations.</p>
+                
+                <p>The results for these hyperparameters are presented below; using the following code.</p>
+
+                <pre><code>
+                    # for C = 1
+                    creditcard_model_1 <-
+                    ksvm(
+                        credit_card_dataH[, 1:10],
+                        credit_card_dataH[, 11],
+                        type = "C-svc",
+                        kernel = "vanilladot",
+                        C = 1,
+                        scaled = TRUE
+                    )
+
+                    model_prediction_1 <-
+                    predict(creditcard_model_1, credit_card_dataH[, 1:10])
+
+                    acc_value_1 <-
+                    sum(model_prediction_1 == credit_card_dataH[, 11]) / nrow(credit_card_dataH)
+
+                    creditcard_model_2 <-
+                    ksvm(
+                        credit_card_dataH[, 1:10],
+                        credit_card_dataH[, 11],
+                        type = "C-svc",
+                        kernel = "vanilladot",
+                        C = 10,
+                        scaled = TRUE
+                    )
+
+                    model_prediction_2 <-
+                    predict(creditcard_model_2, credit_card_dataH[, 1:10])
+
+                    acc_value_2 <-
+                    sum(model_prediction_2 == credit_card_dataH[, 11]) / nrow(credit_card_dataH)
+
+                    creditcard_model_3 <-
+                    ksvm(
+                        credit_card_dataH[, 1:10],
+                        credit_card_dataH[, 11],
+                        type = "C-svc",
+                        kernel = "vanilladot",
+                        C = 100,
+                        scaled = TRUE
+                    )
+
+                    model_prediction_3 <-
+                    predict(creditcard_model_3, credit_card_dataH[, 1:10])
+
+                    acc_value_3 <-
+                    sum(model_prediction_3 == credit_card_dataH[, 11]) / nrow(credit_card_dataH)
+
+                    print(paste0("Accuracy = ", round(acc_value_1, 6)*100, "% when C = 1"))
+                    print(paste0("Accuracy = ", round(acc_value_2, 6)*100, "% when C = 10"))
+                    print(paste0("Accuracy = ", round(acc_value_3, 6)*100, "% when C = 100"))
+                </code></pre>
+
+                <h2>SVM Classifier - Non Linear</h2>
+                <p>Following a similar approach as the linear classifier, the non-linear classifier differentiates by changing 
+                    the `kernel` parameter in the `ksvm()` function. The performance of `rbfdot` and `polydot` kernels are compared.</p>
+
+                <!-- Code snippets and explanations for non-linear approach -->
+
+                <h2>KNN Approach</h2>
+                <p>The k-nearest neighbor (knn) algorithm is used here, focusing on finding the best `k` value. A nested for loop is utilized 
+                    for this purpose, iterating over a range of `k` values to classify data points in the data set.</p>
+
+                <!-- Code snippets and explanations for KNN approach -->
+
+                <h2>Appendix</h2>
+                <p>Table 1 shows the threshold_values and corresponding k_values that yielded the highest accuracy.</p>
+                
+                <!-- Threshold values and k_values table -->
+
+                <!-- End Post Content -->
+                
+            </div>
+        </div>
+    </div>
+
+    <button id="toggleBackground" aria-label="Switch to dark theme">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun" style="display: none;"></i>
+    </button>
+
+    <footer>
+        <p>Copyright © 2023 Akshay Podagatlapalli</p>
+    </footer>
+    <script src="../../js/scripts.js"></script>
+</body>
+</html>

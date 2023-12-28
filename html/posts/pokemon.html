@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="../../images/ap.ico">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>akshay podagatlapalli - Blog</title>
+    <link rel="stylesheet" href="../../css/blog.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'JetBrains Mono';
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="contentLinks">
+            <a href="../projects.html">projects</a>
+            <a href="../playlists.html">playlists</a>
+            <a href="../readings.html">readings</a>
+            <a href="../../docs/Akshay Podagatlapalli Resume.pdf" target="_blank">resume</a>
+        </div>
+        <div class="titleContainer">
+            <div id="projectsElementId"></div>
+            <div class="cursor"></div>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Blog Post Section -->
+        <div class="blog-post">
+            <h1>Who's That Pokemon?</h1>
+            <p class="post-date">Posted on: [Date]</p>
+            <img src="../../images/pokemon1.png" alt="Sample Post Image" class="post-image">
+            <div class="post-content">
+                <p>
+                    <!-- Blog post content goes here -->
+                    <h2>Introduction</h2>
+
+                    Generative Adversarial Networks (GANs) are a type of unsupervised neural networks that falls under the purview 
+                    of deep learning models. They are commonly used in the image-processing domain to create art [1], music [2], or 
+                    to improve the quality of low-resolution images/videos [3]. Recently, researchers at the University of Toronto used 
+                    their applications in biochemistry and medical studies to generate 30,000 designs for six different new compounds 
+                    that were found to imitate drug-like properties and target a protein involved in fibrosis [4]. I trained a GAN model 
+                    to generate fake Pokémon.
+                </p>
+
+                <p>
+                    Because GANs are primarily taught to learn the distribution of any given dataset, the applications are really domain-independent. 
+                    GANs will be able to replicate aspects of our environment given a well-defined dataset. The key constraint is the computing 
+                    power required to train these models, which is further hampered by the fact that they are notoriously difficult to train, 
+                    necessitating extra training time and computational power.
+                </p>
+
+                <p>
+                    What makes training these models so difficult? Understanding this requires taking a look under the hood of this model. 
+                    It was first proposed in the landmark paper Generative Adversarial Nets [5], and it presents a paradigm in which two 
+                    fully-connected neural networks (NN) compete in a zero-sum game. One of the NNs, known as the generative network or the 
+                    generator, will work to generate "false" data, while the other, known as the discriminative network or the discriminator, 
+                    will work to evaluate and distinguish between the actual and fake data.
+                </p>
+
+                <p>
+                    <img src="../../images/post1/fig1.png" alt="Figure 1" class="content-image">
+                </p>
+
+                <p>
+                    Figure 1 depicts an abstract representation of how the generator (green line) would "dupe" the discriminator. The generator 
+                    will train until its distribution resembles that of the real dataset (black dotted line). Given that the generator's job is 
+                    to trick the discriminator until it can no longer distinguish between the two distributions, the discriminative distribution 
+                    (blue dashed line) should flatten when the fake and actual distributions become indistinguishable.
+                </p>
+                
+                <p>
+                    The model used to create the "fake" Pokémon in this case is known as the DCGAN, which stands for Deep Convolutional Generative 
+                    Adversarial Network. This model, unlike the fully connected models suggested in [5] employs two convolutional neural networks (CNNs) 
+                    for the generative and discriminative networks. The discriminator is a CNN model, whereas the generator is a deconvolutional neural 
+                    network, which works inversely to a conventional CNN model. Where a CNN learns the spatial hierarchies of features within an image,
+                    moving from granular to high level details, the deconvolutional neural network or the generator learns to convert the latent space 
+                    inputs into an actual image, generating meaning from noise, by regularly updating its weights by learning how the discriminator evaluates 
+                    the images fed into its network. This is depicted in the figure below, which shows how data flows through a generative neural network.
+
+                </p>
+
+                <p>
+                    <img src="../../images/post1/fig2.png" alt="Figure 1" class="content-image">
+                </p>
+
+                <p>
+                    By providing a random seed, the generator begins to produce candidates for the discriminator from a latent 
+                    space and maps it to the distribution of the dataset being used. A latent space is a representation of compressed 
+                    data best explained in [7]. The space is initially populated randomly, but as the generator begins to understand 
+                    a dataset’s distribution, the latent space would slowly start to be populated by features learned from the distribution. 
+                    In contrast, the discriminator is trained on random datapoints drawn from the actual dataset. Both models will be 
+                    trained until they achieve an acceptable level of accuracy, with each model undergoing backpropagation individually 
+                    to enhance accuracy.
+                </p>
+
+                <p>
+                    This is further emphasized in Figure 3 below, where we see how the data produced by the generator is fed to the 
+                    discriminator along with the real data.
+                </p>
+
+                <p>
+                    <img src="../../images/post1/fig3.png" alt="Figure 1" class="content-image">
+                </p>
+
+                <h2>Data Collection and Processing</h2>
+
+                <p>
+                    For this project, the Pokémon dataset was acquired via Kaggle. The original dataset is made up of 819 photos that were 
+                    uploaded as .png files with a resolution of 256x256 pixels [9]. Because GANs are notoriously data hungry [10], the size 
+                    of this dataset was expanded 13 times prior to training by executing a data augmentation step.
+                </p>
+                
+                <p>
+                    <img src="../../images/post1/fig4.png" alt="Figure 1" class="content-image">
+                </p>
+
+                <p>
+                    Despite expanding the dataset size, the results appeared to follow the same patterns as those seen on Kaggle [9]. 
+                    Normalizing the dataset by calculating the mean and standard deviation did not appear to improve the results and 
+                    actually worsened them.
+                    
+                    <br>
+                    <br>
+
+                    A few considerations regarding the hyperparameters were made before training the model. The training was repeated 
+                    four times to see if altering certain hyperparameters affected the quality of the results. The learning rate, batch size, 
+                    latent space, and number of epochs were all altered. Because of memory constraints caused by the number of layers in the 
+                    models, the 256x256 input picture was scaled down to accept 64x64 and 128x128 images. The change in the input did not appear 
+                    to drastically change the resolution of the outputs either.
+
+                    <br>
+                    <br>
+
+                    Setting the batch size to a smaller value would prevent the discriminator from quickly outperforming the generator, leading 
+                    to poorer results. The learning rate was also set to a conservative value; 1e-4 as it led to better results, purely based on 
+                    the results observed over the 4 iterations. The latent space was primarily changed based on the assumption that because this 
+                    value represented “compressed” data, the generator would reconstruct the distribution of the dataset from a larger value 
+                    (or from larger latent space), ultimately leading to better results. Finally, the training time or epochs were chosen 
+                    based on prior implementations of this project, other similar projects, and the constraints of my PC.
+
+                    <br>
+                    <br>
+
+                    The values that were selected for each of the iterations are presented in the Table 1 below
+
+                    <br>
+                    <br>
+
+                    <table border="1">
+                        <tr>
+                          <th>Run</th>
+                          <th>Model Version</th>
+                          <th>Batch Size</th>
+                          <th>Learning Rate</th>
+                          <th>Latent Space</th>
+                          <th>Epochs</th>
+                        </tr>
+                        <tr>
+                          <td>1</td>
+                          <td>64 px</td>
+                          <td>128</td>
+                          <td>1.00E-04</td>
+                          <td>64</td>
+                          <td>100</td>
+                        </tr>
+                        <tr>
+                          <td>2</td>
+                          <td>64 px</td>
+                          <td>64</td>
+                          <td>2.00E-04</td>
+                          <td>128</td>
+                          <td>70</td>
+                        </tr>
+                        <tr>
+                          <td>3</td>
+                          <td>128 px</td>
+                          <td>128</td>
+                          <td>2.00E-04</td>
+                          <td>256</td>
+                          <td>200</td>
+                        </tr>
+                        <tr>
+                          <td>4</td>
+                          <td>128 px</td>
+                          <td>64</td>
+                          <td>1.00E-04</td>
+                          <td>256</td>
+                          <td>100</td>
+                        </tr>
+                      </table>
+                </p>
+
+                <p>
+                    <h2>Results</h2>
+
+                    <br>
+                    <br>
+
+                    The results for each of the runs, presented in Table 1 are presented below
+
+                    <br>
+                    <br>
+
+                    <h3>RUN 1</h3>
+
+                    <img src="../../images/post1/fig5.gif" alt="Figure 5" class="content-image">
+                    
+                    <br>
+                    
+                    <img src="../../images/post1/fig6.png" alt="Figure 6" class="content-image">
+
+                    <br>
+                    <br>
+
+                    The Pokémon generated using this model have distinct shapes and colours, but they lack features such as faces, 
+                    limbs, or appendages such as tails, wings, horns, fins, and so on that are commonly seen on Pokémon. The losses for 
+                    both models appear to raise concerns about mode collapse and/or failure of convergence based on the loss plot. When 
+                    the generator's loss begins to oscillate repeatedly with the same oscillation loss pattern, mode collapse might have 
+                    occurred. It also results in very little diversity among the samples generated. However, the outcomes are far from 
+                    identical. While it is evident that the loss functions for the generator and discriminator do not converge, it would 
+                    also lead to the results simply producing plain noise as in Figure 7 below.
+
+                    <br>
+                    <br>
+
+                    <img src="../../images/post1/fig7.gif" alt="Figure 7" class="content-image">
+
+                    <br>
+                    <br>
+
+                    As a result, in addition to determining the best combination of hyperparameters, three additional runs were carried out to see 
+                    whether similar patterns in the loss functions from Figure 6 maintained.
+
+                    <h3>RUN 2</h3>
+
+                    <img src="../../images/post1/fig8.gif" alt="Figure 7" class="content-image" width="750">
+
+                    <br>
+
+                    <img src="../../images/post1/fig9.png" alt="Figure 9" class="content-image">
+
+                    <h3>RUN 3</h3>
+                    
+                    <img src="../../images/post1/fig10.gif" alt="Figure 10" class="content-image">
+
+                    <img src="../../images/post1/fig11.png" alt="Figure 11" class="content-image">
+
+                    <img src="../../images/post1/fig12.png" alt="Figure 12" class="content-image">
+
+                    <h3>RUN 4</h3>
+
+                    <img src="../../images/post1/fig13.gif" alt="Figure 13" class="content-image">
+
+                    <img src="../../images/post1/fig14.png" alt="Figure 14" class="content-image">
+
+                    <img src="../../images/post1/fig15.png" alt="Figure 15" class="content-image">
+
+                    <img src="../../images/post1/fig16.png" alt="Figure 16" class="content-image">
+
+                    <br>
+
+                    The loss functions for the generator and discriminator in Figures 9, 10, and 12 are observed to follow a general trend, 
+                    seen in Figure 6. The results obtained throughout each of these runs are also identical to the ones shown in Figure 5. 
+                    However, when examined through a forced creative lens, the results of the third run appear to show some form of limbs 
+                    and appendages. Except for a couple in the last row of Figure 11, none of the results are truly legible. Because this model 
+                    was trained for the longest time, 200 epochs, there is a significant likelihood that training the DCGAN model using the 
+                    hyperparameters from RUN 3 for an even longer time will result in more defined outcomes.
+
+                    <br> <br>
+
+                    Despite the slightly underwhelming results, I believe the project has great promise. Curating a more well-defined dataset 
+                    with greater care to the data augmentation step could yield more clarity to the results presented. Furthermore, by labelling 
+                    the data, and introducing noisy labels through the flipping the labels (by labelling real data as fake), the discriminator 
+                    could be confused., thereby improving the results. In addition, I did not include many filters in the CNN models. Increasing 
+                    the number of filters would also aid the CNN in extracting more information from images.
+
+                </p>
+
+                <p>
+                    <h2> References </h2>
+
+                <ol>
+                    <li><a href="https://www.theverge.com/2019/3/5/18251267/ai-art-gans-mario-klingemann" target="_blank">The Verge: AI Art GANs - Mario Klingemann</a></li>
+                    <li><a href="https://ui.adsabs.harvard.edu/abs/2018arXiv180900219W/abstract" target="_blank">Harvard University: Abstract for arXiv:1809.00219</a></li>
+                    <li><a href="https://www.economist.com/science-and-technology/2017/07/01/fake-news-y" target="_blank">The Economist: Fake News</a></li>
+                    <li><a href="https://www.wired.com/story/molecule-designed-ai-exhibits-druglike-qual" target="_blank">Wired: Molecule Designed AI Exhibits Drug-like Qualities</a></li>
+                    <li><a href="https://arxiv.org/pdf/1406.2661.pdf" target="_blank">arXiv:1406.2661.pdf</a></li>
+                    <li><a href="https://towardsdatascience.com/understanding-latent-space-in-machine-le" target="_blank">Towards Data Science: Understanding Latent Space in Machine Learning</a></li>
+                    <li><a href="https://miro.medium.com/max/792/1*nz9t-D9xYNjxyw3xtzj3aQ.png" target="_blank">Medium: Image Reference</a></li>
+                    <li><a href="https://www.kaggle.com/datasets/kvpratama/pokemon-images-dataset" target="_blank">Kaggle: Pokémon Images Dataset</a></li>
+                    <li><a href="https://blogs.nvidia.com/blog/2020/12/07/neurips-research-limited-data-gan/" target="_blank">NVIDIA Blog: NeurIPS Research on Limited Data</a></li>
+                </ol>
+                    
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <button id="toggleBackground" aria-label="Switch to dark theme">
+        <i class="fas fa-moon"></i>
+        <i class="fas fa-sun" style="display: none;"></i>
+    </button>
+
+    <footer>
+        <p>Copyright © 2023 Akshay Podagatlapalli</p>
+    </footer>
+    <script src="../../js/scripts.js"></script>
+</body>
+</html>

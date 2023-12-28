@@ -1,0 +1,507 @@
+/* Global Styles */
+body {
+    font-family: 'JetBrains Mono', monospace;
+    background-color: #000000;
+    margin: 0;
+    transition: background-color 0.3s ease;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+canvas {
+    display: fixed; /* Prevents extra space below the canvas */
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+/* Global cursor style */
+body, body * {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="32" width="32"><circle cx="16" cy="16" r="10" fill="%2300FF00" stroke="black" stroke-width="2"/></svg>'), auto;
+}
+
+
+.threejs-container {
+    display: flex;
+    top: 0;
+    left: 0;
+    z-index: ; /* Base layer */
+    width: 100%;
+    height: 100%; /* Adjust if necessary */
+}
+
+/* Toggle Button */
+#toggleBackground {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px 15px;
+    z-index: 10;
+    background: none;
+    border: none;
+    color: white;
+}
+
+#toggleBackground .fas {
+    font-size: 1.5em;
+}
+
+.bone-white-background {
+    background-color: #fff5ee; /* Bone white color */
+}
+
+.black-background {
+    background-color: #000000; /* Ensuring default black color is set here for clarity */
+}
+
+
+/* Title Container */
+.titleContainer {
+    font-size: 2em;
+    position: absolute;
+    top: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    white-space: nowrap;
+    color: #00ff08cc;
+    z-index: 3;
+}
+
+.cursor {
+    display: inline-block;
+    width: 0.5em;
+    height: 0.5em;
+    background-color: rgba(0, 255, 8, 0.8);
+    border-radius: 50%;
+    animation: blink 1s infinite alternate;
+    vertical-align: middle;
+    margin-bottom: 0.2em;
+}
+
+@keyframes blink {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+/* Navigation Links */
+.contentLinks {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 50px;
+    z-index: 3;
+}
+
+.contentLinks a {
+    color: rgba(0, 255, 8, 0.8);
+    text-decoration: none;
+    padding: 10px 20px;
+    background-color: rgba(21, 19, 19, 0.6);
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.contentLinks a:hover {
+    background-color: rgba(0, 255, 8, 0.8);
+}
+ 
+  @keyframes wave {
+    0% { transform: rotate(0deg); }
+    50% { transform: rotate(14deg); }
+    100% { transform: rotate(0deg); }
+ }
+ 
+ .wave {
+    display: inline-block;
+    animation: wave 1s infinite;
+ }
+ 
+ html {
+    scroll-behavior: smooth;
+ }
+ 
+/* This rule applies to the main content area */
+.main-content {
+    min-height: calc(100px - 10000px);
+    /* Rest of your styles */
+}
+
+
+ .profile-image {
+    width: 250px; /* Adjust the width as needed */
+    height: 250px; /* Adjust the height as needed */
+    border-radius: 50%; /* This will make it round */
+    object-fit: cover; /* This will ensure the image covers the area without stretching */
+    display: block;
+    margin: 0 auto; /* This centers the image in the section */
+}
+
+:root {
+    --box-text-color: #000; /* Dark color for light background */
+    --paragraph-text-color: #666; /* Grey color for paragraphs */
+    --link-text-color: #0066cc; /* Blue color for links */
+}
+
+/* Inverted colors for dark theme */
+.dark-theme {
+    --box-text-color: #fff; /* Light color for dark background */
+    --paragraph-text-color: #aaa; /* Lighter grey color for paragraphs */
+    --link-text-color: #66ccff; /* Lighter blue color for links */
+}
+
+.about-me {
+    position: relative;
+    z-index: 2;
+    margin-top: 0px;
+    background-color: rgba(0, 255, 8, 0.5); /* Semi-transparent green */
+    color: var(--box-text-color); /* Use CSS variable for text color */
+    width: auto;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.tech-logos {
+    text-align: center; /* Center the logos */
+    padding: 20px; /* Add some padding around the section */
+}
+
+.tech-logos img {
+    margin: 10px; /* Add space around each logo */
+    vertical-align: middle; /* Align logos nicely if they have different heights */
+    width: 75px; /* Set a fixed width for all logos */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.tech-logos2 {
+    text-align: center; /* Center the logos */
+    padding: 20px; /* Add some padding around the section */
+}
+
+.tech-logos2 img {
+    margin: 10px; /* Add space around each logo */
+    vertical-align: middle; /* Align logos nicely if they have different heights */
+    width: 95px; /* Set a fixed width for all logos */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Style for smaller screens */
+@media (max-width: 768px) {
+    .tech-logos img {
+        width: 100px; /* Smaller size for mobile screens */
+        height: auto;
+        margin: 3px;
+    }
+}
+
+
+.projects-container {
+    width: 80%; /* Adjust width as needed */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack children vertically */
+    gap: 2rem; /* Space between projects */
+    margin-top: 15rem; /* Adjust top margin as needed */
+    justify-content: flex-start; /* Align items to the start of the container, which is the default */
+    align-items: flex-start; /* Align items to the left (start) of the container */
+    margin-left: auto; /* Pushes the container to the right */
+}
+
+
+.project {
+    background-color: var(--box-bg-color);
+    box-shadow: var(--box-shadow);
+    color: var(--box-text-color);
+    padding: 1rem; /* space inside the project box */
+    margin-bottom: 2rem; /* space between project boxes */
+    display: flex; /* Aligns children (image and info) side by side */
+    align-items: center; /* Centers children vertically */
+    gap: 20px;
+    transition: box-shadow 0.3s ease-in-out;
+}
+
+.project:hover {
+    box-shadow:
+        0 0 10px rgba(57, 255, 20, 0.8), /* Inner green glow */
+        0 0 20px rgba(57, 255, 20, 0.6), /* Mid green glow */
+        0 0 40px rgba(57, 255, 20, 0.4), /* Outer green glow */
+        0 0 60px rgba(57, 255, 20, 0.2); /* Far green glow */
+}
+
+.project-image {
+    /* No specific styles needed, but you could control the image size here */
+    flex-shrink: 0; /* Prevents the image from shrinking */
+}
+
+.project img {
+    width: 300px; /* responsive image */
+    height: auto; /* maintain aspect ratio */
+    display: block; /* prevent inline spacing */
+    margin-bottom: 1rem; /* space below the image */
+}
+
+.project h2 {
+    color: var(--box-text-color);
+    margin-bottom: 0.5rem; /* space below the title */
+    font-size: 1.5rem; /* adjust size as needed */
+}
+
+.project p {
+    margin-bottom: 1rem;
+    color: var(--paragraph-text-color);
+}
+
+.learn-more {
+    color: var(--link-text-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+body {
+    font-family: 'JetBrains Mono', monospace;
+    background-color: var(--background-color);
+    color: var(--box-text-color); /* Use CSS variable for text color */;
+    margin: 0;
+    padding: 20px;
+}
+
+.book-list {
+    max-width: 800px;
+    margin: auto;
+}
+
+.book-list h1 {
+    margin-top: 23vh; /* If the navbar height is around 10% of the viewport height */
+    /* Other styling for the heading */
+}
+
+.book-item {
+    border-bottom: 1px solid #333;
+    padding: 20px 0;
+}
+
+.book-cover {
+    max-width: 100px;
+    float: left;
+    margin-right: 20px;
+}
+
+.book-item h2 {
+    margin: 0;
+    padding-top: 5px;
+}
+
+.book-item p {
+    margin: 5px 0;
+}
+
+.book-description {
+    clear: both;
+}
+
+/* Clearfix for the float */
+.book-item:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* Contact Links */
+.contact-links {
+    text-align: center; /* Center align the contact links */
+    padding: 20px 0; /* Add some vertical padding */
+    background-color: rgba(21, 19, 19, 0.6); /* Semi-transparent background */
+    margin-top: 20px; /* Add margin on top */
+    margin-left: auto; /* Center the block horizontally */
+    margin-right: auto; /* Center the block horizontally */
+    border-radius: 10px; /* Rounded corners */
+    max-width: 960px; /* Adjust this value to match the width of the content above */
+}
+
+.contact-links a {
+    color: rgba(0, 255, 8, 0.8); /* Green text color */
+    text-decoration: none;
+    margin: 0 15px; /* Space between links */
+    transition: color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.contact-links a:hover {
+    color: #00FF00; /* Brighter green on hover */
+    text-shadow: 
+        0 0 5px #00FF00, /* Inner glow */
+        0 0 10px #00FF00, /* Medium glow */
+        0 0 15px #00FF00, /* Outer glow */
+        0 0 20px #00FF00; /* Further glow */
+}
+
+
+/* Normal theme styles */
+.contact-links img {
+    width: 30px; /* Adjust the size of the icons */
+    height: 30px;
+    vertical-align: middle; /* Align icons with the text */
+    margin-right: 10px; /* Space between icon and text */
+    transition: filter 0.3s ease; /* Smooth transition for filter effect */
+}
+
+/* Dark theme styles */
+.dark-theme .contact-links img {
+    filter: invert(1); /* Inverts the colors of the images */
+}
+
+/* Detailed Project Page Styles */
+.project-detail-container {
+    color: var(--box-text-color); /* Inherit text color from the theme */
+    background-color: #000000; /* Match the global background color */
+    padding: 40px; /* Add padding around the content for spacing */
+    max-width: 960px; /* Set a max-width to keep the line length readable */
+    margin: 40px auto; /* Center it on the page with some margin on top and bottom */
+    border-radius: 8px; /* Optional: if you want rounded corners */
+}
+
+.project-detail-header {
+    text-align: center; /* Center the header content */
+    padding-bottom: 20px; /* Space below the header */
+    border-bottom: 1px solid rgba(0, 255, 8, 0.8); /* A subtle bottom border */
+}
+
+.project-detail-header h1 {
+    font-size: 2.5em; /* Larger font size for the main title */
+    color: rgba(0, 255, 8, 0.8); /* Make the title stand out */
+}
+
+.project-detail-body {
+    padding-top: 20px; /* Space between header and body content */
+}
+
+.project-detail-body img {
+    max-width: 100%; /* Ensure images are not larger than their container */
+    height: auto; /* Maintain aspect ratio */
+    display: block; /* Display block to remove bottom space */
+    margin: 20px auto; /* Center images and add some margin around them */
+}
+
+.project-detail-body p {
+    line-height: 1.6; /* Improve readability with more line-height */
+    margin-bottom: 20px; /* Add space between paragraphs */
+}
+
+.project-detail-footer {
+    text-align: center; /* Center footer content */
+    margin-top: 40px; /* Add space above the footer */
+}
+
+/* Back link to return to the projects page */
+.back-to-projects {
+    color: var(--link-text-color);
+    text-decoration: none;
+    display: inline-block; /* Align with other inline or inline-block elements */
+    margin-top: 20px; /* Space above the link */
+}
+
+/* You may want to reuse this hover effect from your .contentLinks a:hover */
+.back-to-projects:hover {
+    color: #00FF00;
+    text-shadow: 
+        0 0 5px #00FF00, /* Inner glow */
+        0 0 10px #00FF00, /* Medium glow */
+        0 0 15px #00FF00, /* Outer glow */
+        0 0 20px #00FF00; /* Further glow */
+}
+
+/* Add media query for responsiveness */
+@media (max-width: 768px) {
+    .project-detail-container {
+        padding: 20px; /* Less padding on smaller screens */
+    }
+    .project-detail-header h1 {
+        font-size: 2em; /* Slightly smaller font size on smaller screens */
+    }
+}
+
+
+footer {
+    font-size: 0.85em;
+    position: flex;
+    color: #00ff08cc;
+    text-align: center;
+    padding: 10px 0;
+    width: 100%;
+}
+
+/* Blog Post Styles */
+.blog-post {
+    width: 60%; /* Adjust this value as needed */
+    margin: 190px auto; /* This centers the box and keeps the top margin */
+    padding: 20px;
+    background-color: rgba(0, 255, 8, 0.3);
+    color: var(--box-text-color);
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.blog-post h2 {
+    color: rgba(0, 255, 8, 0.8); /* Green color for the post title */
+    margin-bottom: 10px;
+}
+
+.post-date {
+    font-size: 0.9em;
+    color: var(--paragraph-text-color);
+    margin-bottom: 20px;
+}
+
+.post-image {
+    width: 25%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.content-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+
+.post-content p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+
+pre {
+    background-color: #333; /* Dark background */
+    border: 1px solid #444; /* Slightly lighter border for some depth */
+    border-left: 4px solid #555; /* Subtle border to the left */
+    color: #eee; /* Light text color for contrast */
+    page-break-inside: avoid;
+    font-family: 'Consolas', 'Monaco', monospace; /* Monospace font for better code readability */
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
+}
+  
+code {
+font-family: 'Consolas', 'Monaco', monospace;
+color: #9C9C9C; /* Even lighter color for inline code, if needed */
+}
+

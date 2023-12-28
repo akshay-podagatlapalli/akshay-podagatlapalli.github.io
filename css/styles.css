@@ -272,7 +272,6 @@ body {
     color: var(--box-text-color); /* Use CSS variable for text color */;
     margin: 0;
     padding: 20px;
-<<<<<<< HEAD
 }
 
 .book-list {
@@ -439,58 +438,34 @@ footer {
     width: 100%;
 }
 
-=======
+/* Blog Post Styles */
+.blog-post {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: rgba(0, 255, 8, 0.3); /* Semi-transparent green background */
+    color: var(--box-text-color); /* Use CSS variable for text color */
+    border-radius: 10px;
+    box-shadow: var(--box-shadow);
 }
 
-.book-list {
-    max-width: 800px;
-    margin: auto;
+.blog-post h2 {
+    color: rgba(0, 255, 8, 0.8); /* Green color for the post title */
+    margin-bottom: 10px;
 }
 
-.book-list h1 {
-    margin-top: 23vh; /* If the navbar height is around 10% of the viewport height */
-    /* Other styling for the heading */
+.post-date {
+    font-size: 0.9em;
+    color: var(--paragraph-text-color);
+    margin-bottom: 20px;
 }
 
-.book-item {
-    border-bottom: 1px solid #333;
-    padding: 20px 0;
-}
-
-.book-cover {
-    max-width: 100px;
-    float: left;
-    margin-right: 20px;
-}
-
-.book-item h2 {
-    margin: 0;
-    padding-top: 5px;
-}
-
-.book-item p {
-    margin: 5px 0;
-}
-
-.book-description {
-    clear: both;
-}
-
-/* Clearfix for the float */
-.book-item:after {
-    content: "";
-    display: table;
-    clear: both;
-}
-
-
-footer {
-    font-size: 0.85em;
-    position: flex;
-    color: #00ff08cc;
-    text-align: center;
-    padding: 10px 0;
+.post-image {
     width: 100%;
+    height: auto;
+    margin-bottom: 20px;
 }
 
->>>>>>> 263d73e61163e265336e60bf5257ec44c54d45fa
+.post-content p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
