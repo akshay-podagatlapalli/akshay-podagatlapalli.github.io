@@ -1,1 +1,3 @@
-### Visit the portfolio [here](www.akshaypa.com)
+### Visit the portfolio here: 
+
+www.akshaypa.com
